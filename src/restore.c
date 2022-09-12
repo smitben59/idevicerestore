@@ -296,6 +296,11 @@ irecv_device_t restore_get_irecv_device(struct idevicerestore_client_t* client)
 	}
 
 	plist_get_string_val(node, &model);
+
+    if (strstr(model, "DEV")) {
+        info("Found DEV model: %s\n", model);
+        strncpy(strstr(model, "DEV"), "AP", 3);
+    }
 	irecv_devices_get_device_by_hardware_model(model, &irecv_device);
 	free(model);
 
